@@ -3,7 +3,7 @@ import type {Artist} from "~/features/artists/types";
 import {routes} from "~/routes";
 import {type CreateArtistPayload, createArtist} from "~/features/artists/repositories/artistRepository.server";
 import {mapApiErrorToResponse} from "~/lib/remix-errors";
-import {Form, redirect, useNavigation} from "react-router";
+import {Form, redirect, useNavigation, data} from "react-router";
 import {ApiError} from "~/lib/api-types";
 
 type ActionData = {
@@ -14,7 +14,7 @@ type ActionData = {
     };
 }
 
-export async function action({request}: Route.ActionArgs): Promise<Response> {
+export async function action({request}: Route.ActionArgs) {
     const formData: FormData = await request.formData();
     const name = formData.get("name") as string;
     const slug = formData.get("slug") as string;
@@ -30,7 +30,7 @@ export async function action({request}: Route.ActionArgs): Promise<Response> {
     }
 
     if (errors.name || errors.slug) {
-        return new Response(JSON.stringify(errors), {status: 400});
+        return data({errors}, {status: 400});
     }
 
     try {
@@ -45,15 +45,12 @@ export async function action({request}: Route.ActionArgs): Promise<Response> {
     } catch (err) {
         if (err instanceof ApiError) {
             if (err.code === "VALIDATION_ERROR") {
-                return new Response(
-                    JSON.stringify({
-                        errors: {
-                            ...(typeof err.details === "object" ? err.details as any : {}),
-                            general: err.message,
-                        },
-                    }),
-                    {status: 400},
-                )
+                return data({
+                    errors: {
+                        ...(typeof err.details === "object" ? err.details as any : {}),
+                        general: err.message,
+                    },
+                }, {status: 400});
             }
         }
 
