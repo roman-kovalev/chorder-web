@@ -5,4 +5,10 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  server: {
+    allowedHosts: ["new.chorder.local", "chorder.local"],
+    hmr: {
+      clientPort: 8087,
+    },
+  }
 });
