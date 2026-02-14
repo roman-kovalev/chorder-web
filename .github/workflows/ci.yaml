@@ -10,4 +10,5 @@ permissions:
 
 jobs:
   typecheck:
+    name: Typecheck
     uses: ./.github/workflows/reusable-typecheck.yaml
