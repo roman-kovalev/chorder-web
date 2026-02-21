@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/roman-kovalev/chorder-web/compare/v1.0.0...v1.1.0) (2026-02-21)
+
+
+### Features
+
+* update dev dep ([443f41e](https://github.com/roman-kovalev/chorder-web/commit/443f41e5d6830e6f5e78442687f6ca1bcb2ef13d))
+* update dev dep ([7f8f5f0](https://github.com/roman-kovalev/chorder-web/commit/7f8f5f04431f85c688ba8f6a7210539cee25935d))
+
 ## 1.0.0 (2026-02-14)
 
 
