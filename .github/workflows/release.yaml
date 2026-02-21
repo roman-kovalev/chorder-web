@@ -25,6 +25,7 @@ jobs:
       tag-name: ${{ steps.rp.outputs.tag_name }}
 
   typecheck:
+    name: Typecheck
     uses: ./.github/workflows/reusable-typecheck.yaml
     needs:
       - release-please
